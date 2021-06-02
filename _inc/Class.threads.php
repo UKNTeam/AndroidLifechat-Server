@@ -15,8 +15,8 @@ class Threads
         $data_list = array();
         if (mysqli_num_rows($res)) {
             while ($row = mysqli_fetch_array($res)) {
-                $res = mysqli_query($conn, "SELECT table_messages.message, table_messages.options FROM table_messages WHERE table_messages.id_thread = '" . $row["id"] . "' ORDER BY table_messages.create_time DESC LIMIT 1");
-                $row_message = mysqli_fetch_assoc($res);
+                $res_ss = mysqli_query($conn, "SELECT table_messages.message, table_messages.options FROM table_messages WHERE table_messages.id_thread = '" . $row["id"] . "' ORDER BY table_messages.create_time DESC LIMIT 1");
+                $row_message = mysqli_fetch_assoc($res_ss);
                 $user_id_target = $row["user_id"];
                 if ($user_id_target == $this->user_id)
                     $user_id_target = $row["user_id_invite"];

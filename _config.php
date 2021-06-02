@@ -1,5 +1,5 @@
 <?php
-$db_server = "localhost";
+$db_server = "45.130.228.154";
 $db_username = "u106559149_lifechat";
 $db_password = "#sWY/790C";
 $db_dbname = "u106559149_lifechat";
