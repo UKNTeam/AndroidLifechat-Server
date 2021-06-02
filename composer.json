@@ -1,0 +1,13 @@
+{
+    "name": "ily1606/android-lifechat",
+    "authors": [
+        {
+            "name": "ILY-1606",
+            "email": "no1.ily1606@gmail.com"
+        }
+    ],
+    "require": {
+        "cboden/ratchet": "^0.4.3",
+        "psr/http-message": "^1.0"
+    }
+}

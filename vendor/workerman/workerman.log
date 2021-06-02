@@ -1,0 +1,33 @@
+2021-05-28 16:15:01 pid:1 ArgumentCountError: Too few arguments to function {closure}(), 1 passed in D:\Android-Lifechat\vendor\workerman\workerman\Worker.php on line 2497 and exactly 2 expected in D:\Android-Lifechat\chat.php:14
+Stack trace:
+#0 D:\Android-Lifechat\vendor\workerman\workerman\Worker.php(2497): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 D:\Android-Lifechat\vendor\workerman\workerman\Events\Select.php(293): Workerman\Worker->acceptConnection(Resource id #16)
+#2 D:\Android-Lifechat\vendor\workerman\workerman\Worker.php(2430): Workerman\Events\Select->loop()
+#3 D:\Android-Lifechat\vendor\workerman\workerman\Worker.php(1417): Workerman\Worker->run()
+#4 D:\Android-Lifechat\vendor\workerman\workerman\Worker.php(1360): Workerman\Worker::forkWorkersForWindows()
+#5 D:\Android-Lifechat\vendor\workerman\workerman\Worker.php(542): Workerman\Worker::forkWorkers()
+#6 D:\Android-Lifechat\chat.php(31): Workerman\Worker::runAll()
+#7 {main}
+2021-05-28 16:15:01 pid:1 Worker process terminated
+2021-05-28 16:19:08 pid:1 ArgumentCountError: Too few arguments to function {closure}(), 1 passed in D:\Android-Lifechat\vendor\workerman\workerman\Worker.php on line 2497 and exactly 2 expected in D:\Android-Lifechat\chat.php:14
+Stack trace:
+#0 D:\Android-Lifechat\vendor\workerman\workerman\Worker.php(2497): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 D:\Android-Lifechat\vendor\workerman\workerman\Events\Select.php(293): Workerman\Worker->acceptConnection(Resource id #15)
+#2 D:\Android-Lifechat\vendor\workerman\workerman\Worker.php(2430): Workerman\Events\Select->loop()
+#3 D:\Android-Lifechat\vendor\workerman\workerman\Worker.php(1417): Workerman\Worker->run()
+#4 D:\Android-Lifechat\vendor\workerman\workerman\Worker.php(1360): Workerman\Worker::forkWorkersForWindows()
+#5 D:\Android-Lifechat\vendor\workerman\workerman\Worker.php(542): Workerman\Worker::forkWorkers()
+#6 D:\Android-Lifechat\chat.php(31): Workerman\Worker::runAll()
+#7 {main}
+2021-05-28 16:19:08 pid:1 Worker process terminated
+2021-05-28 16:35:45 pid:1 Error: Call to undefined method Workerman\Connection\TcpConnection::getRemoteURI() in D:\Android-Lifechat\chat.php:16
+Stack trace:
+#0 D:\Android-Lifechat\vendor\workerman\workerman\Worker.php(2497): {closure}(Object(Workerman\Connection\TcpConnection))
+#1 D:\Android-Lifechat\vendor\workerman\workerman\Events\Select.php(293): Workerman\Worker->acceptConnection(Resource id #16)
+#2 D:\Android-Lifechat\vendor\workerman\workerman\Worker.php(2430): Workerman\Events\Select->loop()
+#3 D:\Android-Lifechat\vendor\workerman\workerman\Worker.php(1417): Workerman\Worker->run()
+#4 D:\Android-Lifechat\vendor\workerman\workerman\Worker.php(1360): Workerman\Worker::forkWorkersForWindows()
+#5 D:\Android-Lifechat\vendor\workerman\workerman\Worker.php(542): Workerman\Worker::forkWorkers()
+#6 D:\Android-Lifechat\chat.php(32): Workerman\Worker::runAll()
+#7 {main}
+2021-05-28 16:35:45 pid:1 Worker process terminated
