@@ -1,4 +1,5 @@
 <?php
+echo $_SERVER["DOCUMENT_ROOT"];
 require_once __DIR__ . '/vendor/autoload.php';
 include("./RequestInterceptor.php");
 include("./_connect.php");
