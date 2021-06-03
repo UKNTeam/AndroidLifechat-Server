@@ -35,6 +35,15 @@ class Threads
         $this->result["status"] = true;
         $this->result["data"] = $data_list;
     }
+    public function getListUser($thread_id)
+    {
+        global $conn;
+        $res = mysqli_query($conn,"SELECT * FROM table_threads WHERE id = '$thread_id'");
+        $row = mysqli_fetch_assoc($res);
+        $data = array();
+        array_push($data,$row["user_id_invite"],$row["user_id"]);
+        return $data;
+    }
     public function checkThread($user_id_target)
     {
         global $conn;

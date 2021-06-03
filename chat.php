@@ -4,6 +4,7 @@ include("./RequestInterceptor.php");
 include("./_connect.php");
 include("./_inc/Class.Login.php");
 include("./_inc/Class.messages.php");
+include("./_inc/Class.threads.php");
 use Ratchet\Server\IoServer;
 $app = IoServer::factory(
     new \Ratchet\Http\HttpServer(

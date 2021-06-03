@@ -22,16 +22,28 @@ class Regsister
         $email = $this->email;
         $fullname = $this->fullname;
         $password = $this->password;
-        $api_key = "EAA".generateRandomString(25);
+        $api_key = "EAA" . generateRandomString(25);
         if (!empty($username) && !empty($email) && !empty($fullname) && !empty($password)) {
             if (strlen($password) >= 8) {
-                if (mysqli_query($conn, "INSERT INTO table_accounts (`username`,`email`,`fullname`,`password`,`api_key`) VALUES ('$username','$email','$fullname','$password','$api_key')")) {
-                    $this->error["status"] = true;
-                    $this->error["msg"] = "Đăng ký thành công!";
-                    $this->error["api_key"] = $api_key;
+                $res_email = mysqli_query($conn, "SELECT id FROM table_accounts WHERE email = '$email' LIMIT 1");
+                if (mysqli_num_rows($res_email) == 0) {
+                    $res_username = mysqli_query($conn, "SELECT id FROM table_accounts WHERE username = '$username' LIMIT 1");
+                    if (mysqli_num_rows($res_username) == 0) {
+                        if (mysqli_query($conn, "INSERT INTO table_accounts (`username`,`email`,`fullname`,`password`,`api_key`) VALUES ('$username','$email','$fullname','$password','$api_key')")) {
+                            $this->error["status"] = true;
+                            $this->error["msg"] = "Đăng ký thành công!";
+                            $this->error["api_key"] = $api_key;
+                        } else {
+                            $this->error["status"] = false;
+                            $this->error["msg"] = "Có lỗi khi đăng ký tài khoản";
+                        }
+                    } else {
+                        $this->error["status"] = false;
+                        $this->error["msg"] = "Username đã có người sử dụng!";
+                    }
                 } else {
                     $this->error["status"] = false;
-                    $this->error["msg"] = "Có lỗi khi đăng ký tài khoản";
+                    $this->error["msg"] = "Email đã có người sử dụng!";
                 }
             } else {
                 $this->error["status"] = false;

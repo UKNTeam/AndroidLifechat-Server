@@ -37,10 +37,13 @@ class Chat implements MessageComponentInterface
             $from_user = $this->user_id[$from->resourceId];
             echo $msg;
             $msg = json_decode($msg, true);
+            $send_tos = array();
             if (isset($msg["type"]) && isset($msg["thread_id"])) {
                 $data = array();
                 $data["status"] = false;
                 $thread_id = mysqli_real_escape_string($conn, $msg["thread_id"]);
+                $thread = new Threads();
+                $send_tos = $thread->getListUser($thread_id);
                 if ($msg["type"] === "text") {
                     $message_text = mysqli_real_escape_string($conn, $msg["message_text"]);
                     if (!empty($message_text)) {
@@ -84,29 +87,31 @@ class Chat implements MessageComponentInterface
                         $data["status"] = false;
                         $data["message"] = "Có lỗi khi gửi tin nhắn, vui lòng thử lại!";
                     }
-                }elseif ($msg["type"] === "video_call") {
+                } elseif ($msg["type"] === "video_call") {
                     $data["status"] = true;
                     $data["thread_id"] = $thread_id;
-                    $data["message"] = ["owner"=>"me","type"=>"video_call","reply"=>$msg["reply"]];
-                    if($msg["reply"] == "send_uuid"){
+                    $data["message"] = ["owner" => "me", "type" => "video_call", "reply" => $msg["reply"]];
+                    if ($msg["reply"] == "send_uuid") {
                         $data["message"]["data_uuidd"] = $msg["data"];
                     }
                     $data["from"] = $from->resourceId;
-                }
-                elseif($msg["type"] === "typing"){
+                } elseif ($msg["type"] === "typing") {
                     $data["status"] = true;
                     $data["thread_id"] = $thread_id;
-                    $data["message"] = ["owner"=>"me","type"=>"typing"];
+                    $data["message"] = ["owner" => "me", "type" => "typing"];
                 }
                 foreach ($this->clients as $client) {
-                    $data_for_other_user = $data;
-                    if ($data["status"]) {
-                        $data_for_other_user["message"]["owner"] = "other";
+                    $id_client = $this->user_id[$client->resourceId];
+                    if (in_array($id_client, $send_tos)) {
+                        $data_for_other_user = $data;
+                        if ($data["status"]) {
+                            $data_for_other_user["message"]["owner"] = "other";
+                        }
+                        if ($this->user_id[$from->resourceId] == $this->user_id[$client->resourceId])
+                            $client->send(json_encode($data));
+                        else
+                            $client->send(json_encode($data_for_other_user));
                     }
-                    if ($this->user_id[$from->resourceId] == $this->user_id[$client->resourceId])
-                        $client->send(json_encode($data));
-                    else
-                        $client->send(json_encode($data_for_other_user));
                 }
             }
         }
